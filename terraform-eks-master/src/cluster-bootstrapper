@@ -13,12 +13,12 @@ deploy_cluster(){
 	TFVARS_FILE=terraform.tfvars
 	cp "$CURR_PATH"/templates/terraform.tfvars.template "$CURR_PATH"/../"$TFVARS_FILE"
 
-	terraform init
-	#terraform plan
-	terraform apply
+	/usr/local/bin/terraform init
+	#/usr/local/bin/terraform plan
+	/usr/local/bin/terraform apply
 
-	terraform output kubeconfig-aws-1-10 > ~/.kube/eksconfig
-	terraform output role_arn_eks_basic_workers > aws-auth-cm.yaml
+	/usr/local/bin/terraform output kubeconfig-aws-1-10 > ~/.kube/eksconfig
+	/usr/local/bin/terraform output role_arn_eks_basic_workers > aws-auth-cm.yaml
 
 	export KUBECONFIG=~/.kube/eksconfig
 	kubectl apply -f aws-auth-cm.yaml
