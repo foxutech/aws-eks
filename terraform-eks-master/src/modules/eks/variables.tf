@@ -8,10 +8,10 @@ variable "cluster_subnets" {
   type        = "list"
 }
 
-variable "cluster_name" {
-  description = "Name of the cluster"
-  default = "demo-cluster"
+variable "cluster-name" {
+  default     = "demo-cluster"
   type        = "string"
+  description = "The name of your EKS Cluster"
 }
 
 variable "sg_id_cluster" {
