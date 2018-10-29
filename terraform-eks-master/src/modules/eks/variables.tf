@@ -10,6 +10,7 @@ variable "cluster_subnets" {
 
 variable "cluster_name" {
   description = "Name of the cluster"
+  default = "demo-cluster"
   type        = "string"
 }
 
