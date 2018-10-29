@@ -1,0 +1,30 @@
+---
+- name: Build go-app docker image with the docker_image module
+  hosts: localhost
+  tasks:
+    - name: upload the site directory to the docker host
+      synchronize: src=terraform dest=/tmp
+      
+    - name: install the latest version of Apache
+      yum:
+        name: python-py
+        state: latest
+        
+    - name: install docker-py
+      pip:
+        name: docker-py
+        state: present
+      
+    - name: build the image
+      docker_image:
+         name: motoskia/terraform
+         tag: light
+         path: /tmp/terraform
+         state: present
+         push: yes
+
+    - name: run the site in a docker container
+      docker_container:
+         name: terraform
+         image: motoskia/terraform:light
+         command: ["apply"]
